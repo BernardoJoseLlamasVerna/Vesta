@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Result;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,8 @@ class DataController extends Controller
     // dist. vesta-sol en el momento de observación:
     protected $distVestaSol = [346664468.058, 346664384.989, 346664453.969, 346664396.148, 346664434.414, 346664406.144, 346664418.037];
 
-    public function startAnalysis() {
+    public function startAnalysis()
+    {
         $re = '([0-9.,]+)m';
         $arrayElements1 = Storage::get('upload/F1/F1');
         preg_match_all($re, $arrayElements1, $matches1, PREG_SET_ORDER, 0);
@@ -39,9 +41,25 @@ class DataController extends Controller
         $arrayElements8 = Storage::get('upload/F8/F8');
         preg_match_all($re, $arrayElements8, $matches8, PREG_SET_ORDER, 0);
 
-        $arrayResume = [];
+        $coord_x = 944;
+        $coord_y = 963;
+
         for($i = 0; $i< sizeof($matches1); $i++)
         {
+            //calcular coordenadas
+            $line = $i/1024;
+            $rest_division = $i%1024;
+            $coord_x = round($coord_x + (0.5*$rest_division), 2);
+            if($i == 0) {
+                $coord_y = $coord_y;
+            }
+            $coord_y = round($coord_y - ($line-1), 2);
+            //calcular coordenadas
+
+            if(str_replace(',', '.', $matches2[$i][0]) == 0) {
+                continue;
+            }
+
             $f8 = str_replace(',', '.', $matches8[$i][0]);
             $f2 = str_replace(',', '.', $matches2[$i][0]);
             $f7 = str_replace(',', '.', $matches7[$i][0]);
@@ -50,7 +68,10 @@ class DataController extends Controller
             $f4 = str_replace(',', '.', $matches4[$i][0]);
             $f5 = str_replace(',', '.', $matches5[$i][0]);
 
-            //$arrayResume[] = [$f8, $f2, $f7, $f3, $f6, $f4, $f5];
+            /*$arrayResume[] = [$f8, $f2, $f7, $f3, $f6, $f4, $f5];
+
+            var_dump($arrayResume);
+            die();*/
 
             //corregimos cada valor: suponemos $dv y $flujo ordenados según orden de filtros
             $f8_fixed = $f8*M_PI*pow($this->distVestaSol[0], 2)*pow($this->flujoSolar[0], -1);
@@ -119,30 +140,30 @@ class DataController extends Controller
 
             //Material comparison:
             $materialComparative = [$dif_euc, $dif_dio, $dif_how];
-            $result = array_search(min($materialComparative), $materialComparative);
+            $result_material = array_search(min($materialComparative), $materialComparative);
 
-            if($result === 0){
-                $result = 'euc';
+            if($result_material === 0){
+                $result_material = 'euc';
+                print_r($result_material);
             }
 
-            if($result === 1){
-                $result = 'dio';
+            if($result_material === 1){
+                $result_material = 'dio';
+                print_r($result_material);
             }
 
-            if($result === 2){
-                $result = 'how';
+            if($result_material === 2){
+                $result_material = 'how';
+                print_r($result_material);
             }
 
-            $arrayResume[] = $result;
-
-            // insert en tabla de: [resultado (eu, di, how), coordenadas]
-
-            print_r($result);
-            if(count($arrayResume)>= 200) break;
+            if($result_material === 'euc' || $result_material === 'dio') {
+                $result = new Result();
+                $result->material = $result_material;
+                $result->coord_x = $coord_x;
+                $result->coord_y = $coord_x;
+                $result->save();
+            }
         }
-
-        print_r($arrayResume);
-
-
     }
 }

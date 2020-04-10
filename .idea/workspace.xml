@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba7d39bf-e0fc-4b16-9a7a-cf2a9d31932b" name="Default Changelist" comment="" />
+    <list default="true" id="ba7d39bf-e0fc-4b16-9a7a-cf2a9d31932b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DataController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -120,6 +127,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -153,6 +161,11 @@
       <option name="presentableId" value="Default" />
       <updated>1585993863390</updated>
       <workItem from="1585993865140" duration="16799000" />
+      <workItem from="1586153688246" duration="3794000" />
+      <workItem from="1586192002430" duration="14000" />
+      <workItem from="1586239991370" duration="599000" />
+      <workItem from="1586326041879" duration="1667000" />
+      <workItem from="1586516987823" duration="9099000" />
     </task>
     <servers />
   </component>
@@ -168,13 +181,22 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="763" y="1547" width="458" height="178" key="NewPhpFileDialog/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1585994128784" />
-    <state x="565" y="1305" width="864" height="662" key="find.popup" timestamp="1586013409645">
+    <state x="540" y="328" key="com.intellij.ide.util.TipDialog" timestamp="1586188042777">
+      <screen x="75" y="0" width="1845" height="1080" />
+    </state>
+    <state x="540" y="328" key="com.intellij.ide.util.TipDialog/0.1080.1920.1080/75.0.1845.1080@75.0.1845.1080" timestamp="1586188042777" />
+    <state x="605" y="0" width="1315" height="958" maximized="true" key="dock-window-1" timestamp="1586517009305">
+      <screen x="75" y="0" width="1845" height="1080" />
+    </state>
+    <state x="605" y="0" width="1315" height="958" maximized="true" key="dock-window-1/75.0.1845.2160@75.0.1845.2160" timestamp="1586362923282" />
+    <state x="565" y="1305" width="864" height="662" key="find.popup" timestamp="1586517246621">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state x="565" y="1305" width="864" height="662" key="find.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1586013409645" />
-    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup" timestamp="1585998915912">
+    <state x="565" y="1305" width="864" height="662" key="find.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1586517246621" />
+    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup" timestamp="1586519839980">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1585998915912" />
+    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1586519839980" />
+    <state x="628" y="90" width="840" height="2068" key="search.everywhere.popup/75.0.1845.2160@75.0.1845.2160" timestamp="1586362892323" />
   </component>
 </project>
