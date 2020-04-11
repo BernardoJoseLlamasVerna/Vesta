@@ -13,6 +13,8 @@ class CreateResultsTable extends Migration
      */
     public function up()
     {
+        //$this->down();
+
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->string('material');

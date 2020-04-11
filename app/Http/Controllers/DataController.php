@@ -17,8 +17,8 @@ class DataController extends Controller
     public function startAnalysis()
     {
         $re = '([0-9.,]+)m';
-        $arrayElements1 = Storage::get('upload/F1/F1');
-        preg_match_all($re, $arrayElements1, $matches1, PREG_SET_ORDER, 0);
+        /*$arrayElements1 = Storage::get('upload/F1/F1');
+        preg_match_all($re, $arrayElements1, $matches1, PREG_SET_ORDER, 0);*/
 
         $arrayElements2 = Storage::get('upload/F2/F2');
         preg_match_all($re, $arrayElements2, $matches2, PREG_SET_ORDER, 0);
@@ -44,20 +44,36 @@ class DataController extends Controller
         $coord_x = 944;
         $coord_y = 963;
 
-        for($i = 0; $i< sizeof($matches1); $i++)
+        for($i = 0; $i< sizeof($matches2); $i++)
         {
-            //calcular coordenadas
-            $line = $i/1024;
-            $rest_division = $i%1024;
-            $coord_x = round($coord_x + (0.5*$rest_division), 2);
-            if($i == 0) {
-                $coord_y = $coord_y;
-            }
-            $coord_y = round($coord_y - ($line-1), 2);
-            //calcular coordenadas
+            $pixel_x = 0;
+            $pixel_y = 0;
 
             if(str_replace(',', '.', $matches2[$i][0]) == 0) {
                 continue;
+            }
+
+            //calcular coordenadas
+
+            if($i === 0) {
+                $pixel_x = $coord_x;
+                $pixel_y = $coord_y;
+            }
+
+            if($i > 0 && $i%1024 === 0){
+                // pixel es el número 1024 de esa fila
+                $line = $i/1024;
+                $pixel_y = $coord_y - ($line -1);
+                $pixel_x = $coord_x + (1024*0.5);
+            }
+
+            $rest_division = $i%1024;
+            $min_interval = 1024*intdiv($i, 1024);
+            $max_interval = 1024*(intdiv($i, 1024) + 1);
+
+            if($min_interval < $i && $i < $max_interval) {
+                $pixel_x = $coord_x + (0.5*$rest_division);
+                $pixel_y = $coord_y - $min_interval;
             }
 
             $f8 = str_replace(',', '.', $matches8[$i][0]);
@@ -82,26 +98,27 @@ class DataController extends Controller
             $f4_fixed = $f4*M_PI*pow($this->distVestaSol[5], 2)*pow($this->flujoSolar[5], -1);
             $f5_fixed = $f5*M_PI*pow($this->distVestaSol[6], 2)*pow($this->flujoSolar[6], -1);
 
-            //$arrayResume[] = [$f8_fixed, $f2_fixed, $f7_fixed, $f3_fixed, $f6_fixed, $f4_fixed, $f5_fixed];
+            /*$arrayResume[] = [$f8_fixed, $f2_fixed, $f7_fixed, $f3_fixed, $f6_fixed, $f4_fixed, $f5_fixed];
+            var_dump($arrayResume);
+            die();*/
 
             //normalizamos con respecto a F2:
             $f8_normalized = $f8_fixed/$f2_fixed;
-            $f2_normalized = $f2_fixed/$f2_fixed;
+            $f2_normalized = 1;
             $f7_normalized = $f7_fixed/$f2_fixed;
             $f3_normalized = $f3_fixed/$f2_fixed;
             $f6_normalized = $f6_fixed/$f2_fixed;
             $f4_normalized = $f4_fixed/$f2_fixed;
             $f5_normalized = $f5_fixed/$f2_fixed;
 
-            //$arrayResume[] = [$f8_normalized, $f2_normalized, $f7_normalized, $f3_normalized, $f6_normalized, $f4_normalized, $f5_normalized];
-
-            /*print_r($arrayResume);
+            /*$arrayResume[] = [$f8_normalized, $f2_normalized, $f7_normalized, $f3_normalized, $f6_normalized, $f4_normalized, $f5_normalized];
+            print_r($arrayResume);
             die();*/
 
             //Determinamos el tipo de material:
             //1.-Eucrite:
             $f8_euc_compared = pow($f8_normalized-0.870934895, 2);
-            $f2_euc_compared = pow($f2_normalized-1, 2);
+            $f2_euc_compared = 0;
             $f7_euc_compared = pow($f7_normalized-1.085860881, 2);
             $f3_euc_compared = pow($f3_normalized-1.178224997, 2);
             $f6_euc_compared = pow($f6_normalized-1.03832738, 2);
@@ -112,9 +129,13 @@ class DataController extends Controller
 
             $dif_euc = sqrt(array_sum($euc_compared_resumed));
 
+            // 0.85977264128946
+            /*var_dump($dif_euc);
+            die();*/
+
             //2.-Diogenite:
             $f8_dio_compared = pow($f8_normalized-0.70610281, 2);
-            $f2_dio_compared = pow($f2_normalized-1, 2);
+            $f2_dio_compared = 0;
             $f7_dio_compared = pow($f7_normalized-1.075217256, 2);
             $f3_dio_compared = pow($f3_normalized-1.035497439, 2);
             $f6_dio_compared = pow($f6_normalized-0.676677086, 2);
@@ -125,9 +146,13 @@ class DataController extends Controller
 
             $dif_dio = sqrt(array_sum($dio_compared_resumed));
 
+            //0.43080422935194
+            /*var_dump($dif_dio);
+            die();*/
+
             //3.-Howardite:
             $f8_how_compared = pow($f8_normalized-0.829196281, 2);
-            $f2_how_compared = pow($f2_normalized-1, 2);
+            $f2_how_compared = 0;
             $f7_how_compared = pow($f7_normalized-1.074897103, 2);
             $f3_how_compared = pow($f3_normalized-1.078338401, 2);
             $f6_how_compared = pow($f6_normalized-0.673516674, 2);
@@ -138,32 +163,44 @@ class DataController extends Controller
 
             $dif_how = sqrt(array_sum($how_compared_resumed));
 
+            //0.36685180058537
+            /*var_dump($dif_how);
+            die();*/
+
             //Material comparison:
             $materialComparative = [$dif_euc, $dif_dio, $dif_how];
             $result_material = array_search(min($materialComparative), $materialComparative);
 
+            //pruebas
+            /*var_dump($result_material);
+            die();*/
+            //pruebas
+
+            if($result_material === 2){
+                continue;
+            }
+
             if($result_material === 0){
-                $result_material = 'euc';
-                print_r($result_material);
+                $result = new Result();
+                $result->material = 'euc';
+                $result->coord_x = $pixel_x;
+                $result->coord_y = $pixel_y;
+                $result->save();
+
+                continue;
             }
 
             if($result_material === 1){
-                $result_material = 'dio';
-                print_r($result_material);
+                /*$result = new Result();
+                $result->material = 'dio';
+                $result->coord_x = $pixel_x;
+                $result->coord_y = $pixel_y;
+                $result->save();*/
+
+                continue;
             }
 
-            if($result_material === 2){
-                $result_material = 'how';
-                print_r($result_material);
-            }
-
-            if($result_material === 'euc' || $result_material === 'dio') {
-                $result = new Result();
-                $result->material = $result_material;
-                $result->coord_x = $coord_x;
-                $result->coord_y = $coord_x;
-                $result->save();
-            }
+            continue;
         }
     }
 }
