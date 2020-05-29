@@ -48,11 +48,14 @@ class DataController extends Controller
         $arrayElements8 = Storage::get('upload/F8/F8');
         preg_match_all($re, $arrayElements8, $matches8, PREG_SET_ORDER, 0);
 
+        //$resultsFile = Storage::put('results/results.txt', '');
+
         $euc = 0;
         $dio = 0;
         $how = 0;
 
-        for($i = 0; $i< sizeof($matches2); $i++)
+        //for($i = 0; $i< sizeof($matches2); $i++)
+        for($i = 0; $i< 3; $i++)
         {
             //check if 0, empty or null--->continue iteration
             if(!$this->checkPixelIfValid($matches2[$i][0])) {
@@ -110,6 +113,28 @@ class DataController extends Controller
 
             if($result_material === 2){
                 $how = $how + 1;
+
+                // pruebas
+                /*$data_para_insertar = [
+                    'material' => 'how',
+                    'coord_x' => $pixel_x,
+                    'coord_y' => $pixel_y,
+                ];
+
+                $json_data = json_decode(Storage::get('results/results.txt'), true);
+
+                if(empty($json_data)) {
+                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', [json_encode($data_para_insertar)]);
+                    continue;
+                }
+
+                $json_data = array_push($json_data, $data_para_insertar);
+
+                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));*/
+                // pruebas
+
+                break;
+
                 continue;
             }
 
@@ -121,6 +146,28 @@ class DataController extends Controller
                 $result->save();*/
 
                 $euc = $euc + 1;
+
+                // pruebas
+                /*$data_para_insertar = [
+                    'material' => 'euc',
+                    'coord_x' => $pixel_x,
+                    'coord_y' => $pixel_y,
+                ];
+
+                $json_data = json_decode(Storage::get('results/results.txt'), true);
+
+                if(!is_array($json_data)) {
+                    $json_data = [];
+                }
+
+                if(empty($json_data)) {
+                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($data_para_insertar));
+                    continue;
+                }
+                $json_data = array_push($json_data, $data_para_insertar);
+                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));*/
+                // pruebas
+
                 continue;
             }
 
@@ -132,6 +179,28 @@ class DataController extends Controller
                 $result->save();*/
 
                 $dio = $dio + 1;
+
+                // pruebas
+                /*$data_para_insertar = [
+                    'material' => 'dio',
+                    'coord_x' => $pixel_x,
+                    'coord_y' => $pixel_y,
+                ];
+
+                $json_data = json_decode(Storage::get('results/results.txt'), true);
+
+                if(!is_array($json_data)) {
+                    $json_data = [];
+                }
+
+                if(empty($json_data)) {
+                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($data_para_insertar));
+                    continue;
+                }
+                $json_data = array_push($json_data, $data_para_insertar);
+                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));*/
+                // pruebas
+
                 continue;
             }
             continue;
