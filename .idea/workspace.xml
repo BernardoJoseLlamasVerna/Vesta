@@ -170,12 +170,22 @@
       <workItem from="1588582017695" duration="1259000" />
       <workItem from="1589466770042" duration="10814000" />
       <workItem from="1590749648421" duration="9100000" />
-      <workItem from="1590831001651" duration="7802000" />
+      <workItem from="1590831001651" duration="8297000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state x="665" y="1423" width="689" height="425" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590750398138">
@@ -194,6 +204,10 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="763" y="1547" width="458" height="178" key="NewPhpFileDialog/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1585994128784" />
+    <state x="175" y="1212" width="1645" height="848" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590842185364">
+      <screen x="0" y="1080" width="1920" height="1080" />
+    </state>
+    <state x="175" y="1212" width="1645" height="848" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1590842185364" />
     <state x="484" y="1408" key="com.intellij.ide.util.TipDialog" timestamp="1590831374324">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
@@ -207,10 +221,10 @@
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
     <state x="565" y="1305" width="864" height="662" key="find.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1586517246621" />
-    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup" timestamp="1590841474313">
+    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup" timestamp="1590842299383">
       <screen x="0" y="1080" width="1920" height="1080" />
     </state>
-    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1590841474313" />
+    <state x="576" y="1125" width="840" height="1034" key="search.everywhere.popup/0.1080.1920.1080/75.0.1845.1080@0.1080.1920.1080" timestamp="1590842299383" />
     <state x="628" y="90" width="840" height="2068" key="search.everywhere.popup/75.0.1845.2160@75.0.1845.2160" timestamp="1586362892323" />
   </component>
 </project>

@@ -49,6 +49,15 @@ class DataController extends Controller
         preg_match_all($re, $arrayElements8, $matches8, PREG_SET_ORDER, 0);
 
         //$resultsFile = Storage::put('results/results.txt', '');
+        /*$headers = [
+            'orbit' => 'Vesta Test',
+            'results' => []
+        ];
+
+        file_put_contents(
+            '/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt',
+            json_encode($headers)
+        );*/
 
         $euc = 0;
         $dio = 0;
