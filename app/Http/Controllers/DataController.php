@@ -55,7 +55,7 @@ class DataController extends Controller
         $how = 0;
 
         //for($i = 0; $i< sizeof($matches2); $i++)
-        for($i = 0; $i< 3; $i++)
+        for($i = 0; $i< 1000; $i++)
         {
             //check if 0, empty or null--->continue iteration
             if(!$this->checkPixelIfValid($matches2[$i][0])) {
@@ -113,113 +113,21 @@ class DataController extends Controller
 
             if($result_material === 2){
                 $how = $how + 1;
-
-                // pruebas
-                $data_para_insertar = [
-                    'material' => 'how',
-                    'coord_x' => $pixel_x,
-                    'coord_y' => $pixel_y,
-                ];
-
-                /*$json_data = json_decode(Storage::get('results/results.txt'), true);
-
-                if(empty($json_data)) {
-                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', [json_encode($data_para_insertar)]);
-                    continue;
-                }
-
-                $json_data = array_push($json_data, $data_para_insertar);
-
-                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));
-
-                $fichero = '/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt';
-                file_put_contents($fichero, $data_para_insertar.PHP_EOL, FILE_APPEND | LOCK_EX);*/
-
-                // pruebas
-
+                $this->insertResult('how', $pixel_x, $pixel_y);
 
                 continue;
             }
 
             if($result_material === 0){
-                /*$result = new Result();
-                $result->material = 'euc';
-                $result->coord_x = $pixel_x;
-                $result->coord_y = $pixel_y;
-                $result->save();*/
-
                 $euc = $euc + 1;
-
-                // pruebas
-                /*$data_para_insertar = [
-                    'material' => 'euc',
-                    'coord_x' => $pixel_x,
-                    'coord_y' => $pixel_y,
-                ];
-
-                $json_data = json_decode(Storage::get('results/results.txt'), true);
-
-                if(!is_array($json_data)) {
-                    $json_data = [];
-                }
-
-                if(empty($json_data)) {
-                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($data_para_insertar));
-                    continue;
-                }
-                $json_data = array_push($json_data, $data_para_insertar);
-                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));
-
-                $data_para_insertar = [
-                    'material' => 'euc',
-                    'coord_x' => $pixel_x,
-                    'coord_y' => $pixel_y,
-                ];
-                $fichero = '/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt';
-                file_put_contents($fichero, $data_para_insertar."\n", FILE_APPEND | LOCK_EX);*/
-                // pruebas
-
+                $this->insertResult('euc', $pixel_x, $pixel_y);
 
                 continue;
             }
 
             if($result_material === 1){
-                /*$result = new Result();
-                $result->material = 'dio';
-                $result->coord_x = $pixel_x;
-                $result->coord_y = $pixel_y;
-                $result->save();*/
-
                 $dio = $dio + 1;
-
-                // pruebas
-                /*$data_para_insertar = [
-                    'material' => 'dio',
-                    'coord_x' => $pixel_x,
-                    'coord_y' => $pixel_y,
-                ];
-
-                $json_data = json_decode(Storage::get('results/results.txt'), true);
-
-                if(!is_array($json_data)) {
-                    $json_data = [];
-                }
-
-                if(empty($json_data)) {
-                    file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($data_para_insertar));
-                    continue;
-                }
-                $json_data = array_push($json_data, $data_para_insertar);
-                file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data));
-
-                $data_para_insertar = [
-                    'material' => 'dio',
-                    'coord_x' => $pixel_x,
-                    'coord_y' => $pixel_y,
-                ];
-                $fichero = '/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt';
-                file_put_contents($fichero, $data_para_insertar."\n", FILE_APPEND | LOCK_EX);*/
-                // pruebas
+                $this->insertResult('dio', $pixel_x, $pixel_y);
 
                 continue;
             }
@@ -341,5 +249,23 @@ class DataController extends Controller
         }
 
         return [$pixel_x, $pixel_y];
+    }
+
+    /**
+     * @param $material
+     * @param $coord_x
+     * @param $coord_y
+     */
+    private function insertResult($material, $coord_x, $coord_y)
+    {
+        $data_para_insertar = [
+            'material' => $material,
+            'coord_x' => $coord_x,
+            'coord_y' => $coord_y,
+        ];
+
+        $json_data = json_decode(Storage::get('results/results.txt'), true);
+        $json_data['results'][] = $data_para_insertar;
+        file_put_contents('/home/berni/Documentos/MisProyectos/Vesta/storage/app/results/results.txt', json_encode($json_data, JSON_PRETTY_PRINT));
     }
 }
